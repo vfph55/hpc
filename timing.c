@@ -38,42 +38,6 @@ double time_ji(int N){
 	return t1;
 }
 
-double time_ijk(int N){
-
-	int i, j;
-	
-	double A[N][N];
-	double B[N][N];
-	double C[N][N];
-	
-	clock_t t0 = clock();
-	for(i=0; i<N; i++){
-		for (j=0; j<N; j++){
-			C[i][j] = A[i][j] + B[i][j];
-		}
-	}
-	double t1 = ((double)clock() - t0) / CLOCKS_PER_SEC;
-	return t1;
-}
-
-double time_ji(int N){
-
-	int i, j;
-	
-	double A[N][N];
-	double B[N][N];
-	double C[N][N];
-	
-	clock_t t0 = clock();
-	for(j=0; i<N; i++){
-		for (i=0; j<N; j++){
-			C[i][j] = A[i][j] + B[i][j];
-		}
-	}
-	double t1 = ((double)clock() - t0) / CLOCKS_PER_SEC;
-	return t1;
-}
-
 int main(int argc, char **argv){
 
 	int N = atoi(argv[1]);
