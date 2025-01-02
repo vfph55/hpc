@@ -117,7 +117,7 @@ int main(int argc, char** argv) {
         // Evaluate the PDE
         dxdt(du, dv, u, v);
 
-        // Update the state variables u,v
+        // Update the state variables u and v
         step(du, dv, u, v);
         
         // Calculate norms at given intervals, only on rank 0
@@ -125,13 +125,19 @@ int main(int argc, char** argv) {
             nrmu = norm(u); // Local norm
             nrmv = norm(v); // Local norm
             
-            // Print to console
+            // Communicate the norms to rank 0
+            double global_nrmu, global_nrmv;
+            MPI_Reduce(&nrmu, &global_nrmu, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+            MPI_Reduce(&nrmv, &global_nrmv, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
+            // Print to console and write to file only from rank 0
             if (rank == 0) {
-                printf("t = %2.1f\tu-norm = %2.5f\tv-norm = %2.5f\n", t, nrmu, nrmv);
-                fprintf(fptr, "%f\t%f\t%f\n", t, nrmu, nrmv);
+                printf("t = %2.1f\tu-norm = %2.5f\tv-norm = %2.5f\n", t, global_nrmu, global_nrmv);
+                fprintf(fptr, "%f\t%f\t%f\n", t, global_nrmu, global_nrmv);
             }
         }
     }
+ 
     // Stop timing
     double end_time = MPI_Wtime();
     double total_time = end_time - start_time;
