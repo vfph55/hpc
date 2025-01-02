@@ -72,7 +72,7 @@ int main(int argc, char** argv){
 	double t = 0.0, nrmu, nrmv;
 	double u[N][N], v[N][N], du[N][N], dv[N][N];
 	
-	FILE *fptr = fopen("nrms.txt", "w");
+	FILE *fptr = fopen("part2.dat", "w");
 	fprintf(fptr, "#t\t\tnrmu\t\tnrmv\n");
 	
 	// initialize the state

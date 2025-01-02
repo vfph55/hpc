@@ -87,17 +87,28 @@ double norm(double x[N][N]) {
     return global_nrm;
 }
 
-int main(int argc, char **argv) {
-    MPI_Init(&argc, &argv); // Initialize MPI
-    int rank;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank); // Get current process ID
+int main(int argc, char** argv) {
+    // Start timing
+    double start_time = MPI_Wtime();
 
-    double t = 0.0;
+    MPI_Init(&argc, &argv); // Initialize the MPI environment
+
+    int rank, size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    double t = 0.0, nrmu, nrmv;
     double u[N][N], v[N][N], du[N][N], dv[N][N];
 
-    // Initialize state
-    init(u, v);
+    // Open the output file
+    FILE *fptr = fopen("part2.dat", "a"); // Append mode
+    if (rank == 0) {
+        fprintf(fptr, "#t\t\tnrmu\t\tnrmv\n");
+    }
 
+    // Initialize the state
+    init(u, v);
+    
     // Time-loop
     for (int k = 0; k < M; k++) {
         // Track the time
@@ -106,18 +117,30 @@ int main(int argc, char **argv) {
         // Evaluate the PDE
         dxdt(du, dv, u, v);
 
-        // Update the state variables u and v
+        // Update the state variables u,v
         step(du, dv, u, v);
-
-        // Calculate the norms at a specific interval (if rank 0)
-        if (k % m == 0 && rank == 0) {
-            double nrmu = norm(u);
-            double nrmv = norm(v);
-            printf("t = %2.1f\tu-norm = %2.5f\tv-norm = %2.5f\n", t, nrmu, nrmv);
+        
+        // Calculate norms at given intervals, only on rank 0
+        if (k % m == 0) {
+            nrmu = norm(u); // Local norm
+            nrmv = norm(v); // Local norm
+            
+            // Print to console
+            if (rank == 0) {
+                printf("t = %2.1f\tu-norm = %2.5f\tv-norm = %2.5f\n", t, nrmu, nrmv);
+                fprintf(fptr, "%f\t%f\t%f\n", t, nrmu, nrmv);
+            }
         }
     }
+    // Stop timing
+    double end_time = MPI_Wtime();
+    double total_time = end_time - start_time;
 
-    // Finalize MPI
-    MPI_Finalize();
+    if (rank == 0) {
+        printf("Total time: %f seconds\n", total_time);
+    }
+
+    fclose(fptr);
+    MPI_Finalize(); // Finalize the MPI environment
     return 0;
 }
