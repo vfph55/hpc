@@ -2,7 +2,7 @@
 
 # Request resources:
 #SBATCH -N 1		# number of compute nodes. 
-#SBATCH -n 4		# number of MPI ranks (1 per CPU core)
+#SBATCH -n 1		# number of MPI ranks (1 per CPU core)
 #SBATCH --mem=1G	# memory required per node, in units M, G or T
 #SBATCH --time=0:15:0	# time limit for job (format:  days-hours:minutes:seconds)
 

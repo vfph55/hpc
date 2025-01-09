@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc-14 build active file",
-            "command": "/opt/homebrew/bin/gcc-14",
+            "command": "gcc",
             "args": [
                 "-fopenmp",
                 "-fdiagnostics-color=always",

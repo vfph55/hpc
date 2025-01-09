@@ -113,11 +113,12 @@ int main(int argc, char** argv){
         printf("number threads:%d, spent time: %f\n",n[i],total_times[i]);
     }
     
-    FILE *fptr = fopen("part1_timeAnalysis.dat", "w");
-    fprintf(fptr, "numberThread\t\ttime\t\tspeedup\t\teffciency\n");
-    for(int i =0;i<4;i++){
-        fprintf(fptr, "%d\t\t%f\t\t%f\t\t%f\n", n[i], total_times[i], total_times[0]/total_times[i],total_times[0]/total_times[i]/n[i]);
-    }
+    // FILE *fptr = fopen("part1_timeAnalysis.dat", "w");
+    // fprintf(fptr, "numberThread\t\ttime\t\tspeedup\t\teffciency\n");
+    // for(int i =0;i<4;i++){
+    //     fprintf(fptr, "%d\t\t%f\t\t%f\t\t%f\n", n[i], total_times[i], total_times[0]/total_times[i],total_times[0]/total_times[i]/n[i]);
+    // }
+    // fclose(fptr);
 
 	return 0;
 }
