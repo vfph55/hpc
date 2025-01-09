@@ -75,10 +75,10 @@ double norm(double x[N][N]) {
 }
 
 int main(int argc, char** argv){
-    int n[] = {1,2,4,8};
-    double total_times[4];
-    for(int i=0;i<4;i++){
-        omp_set_num_threads(n[i]);
+    // int n[] = {1,2,4,8};
+    // double total_times[4];
+    // for(int i=0;i<4;i++){
+    //     omp_set_num_threads(n[i]);
 
         double start_time = omp_get_wtime();
         double t = 0.0, nrmu, nrmv;
@@ -109,9 +109,9 @@ int main(int argc, char** argv){
         
         fclose(fptr);
         double end_time = omp_get_wtime();
-        total_times[i] = end_time - start_time;
-        printf("number threads:%d, spent time: %f\n",n[i],total_times[i]);
-    }
+        double total_time = end_time - start_time;
+        printf("spent time: %f\n",total_time);
+    // }
     
     // FILE *fptr = fopen("part1_timeAnalysis.dat", "w");
     // fprintf(fptr, "numberThread\t\ttime\t\tspeedup\t\teffciency\n");
