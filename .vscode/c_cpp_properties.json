@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**"
             ],
-            "compilerPath": "/opt/homebrew/bin/gcc-14",
+            "compilerPath": "/opt/homebrew/bin/g++-14",
             "cStandard": "${default}",
             "cppStandard": "${default}",
             "intelliSenseMode": "macos-clang-arm64",
@@ -16,16 +16,25 @@
         {
             "name": "mpicc",
             "includePath": [
-                "${workspaceFolder}/**"
+                "/Users/chengxiaoqian/Desktop/hpc/**"
             ],
             "defines": [],
             "macFrameworkPath": [
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/opt/homebrew/bin/gcc-14",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "macos-clang-arm64"
+            "intelliSenseMode": "macos-clang-arm64",
+            "compilerPathInCppPropertiesJson": "/usr/bin/clang",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "/Users/chengxiaoqian/Desktop/hpc/**",
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4

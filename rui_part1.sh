@@ -14,7 +14,7 @@ module purge
 module load gcc
 
 # compile part.1c into part1
-gcc -fopenmp -lm rui_part1.c -o rui_part1 -lm
+gcc-14 -fopenmp -lm rui_part1.c -o rui_part1 -lm
 
 # run part2 with 4 threads
 OMP_NUM_THREADS=4 ./rui_part1
