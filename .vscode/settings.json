@@ -62,6 +62,7 @@
     "stdlib.h": "c",
     "math.h": "c",
     "params.h": "c",
-    "mpi.h": "c"
+    "mpi.h": "c",
+    "omp.h": "c"
   }
 }

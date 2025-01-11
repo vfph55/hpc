@@ -8,7 +8,7 @@
             "compilerPath": "/opt/homebrew/bin/gcc-14",
             "cStandard": "${default}",
             "cppStandard": "${default}",
-            "intelliSenseMode": "macos-gcc-x64",
+            "intelliSenseMode": "macos-clang-arm64",
             "compilerArgs": [
                 ""
             ]
